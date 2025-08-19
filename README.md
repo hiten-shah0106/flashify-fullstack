@@ -6,13 +6,12 @@ Flashify is a modern, full-stack flashcard application designed to help users ma
 
 ## 🏗️ Architecture Overview
 
-### Frontend (Next.js 14 + React)
+### Frontend (Next.js + React)
 
 -   **Framework**: Next.js 14 with App Router
 -   **Styling**: Tailwind CSS with custom design system
 -   **UI Components**: Custom component library with Radix UI primitives
 -   **State Management**: React Context API for authentication
--   **3D Graphics**: Three.js for animated hero section
 
 ### Backend (Flask + Python)
 
