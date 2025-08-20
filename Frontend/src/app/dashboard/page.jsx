@@ -16,7 +16,6 @@ export default function DashboardPage() {
     const [newDeckName, setNewDeckName] = useState("");
     const [loading, setLoading] = useState(true);
 
-    // Fetch decks on mount
     useEffect(() => {
         if (token) {
             apiService.getDecks(token).then((data) => {
@@ -26,7 +25,6 @@ export default function DashboardPage() {
         }
     }, [token]);
 
-    // Create a new deck
     const handleCreateDeck = async () => {
         if (!newDeckName.trim()) return;
         const res = await apiService.createDeck(token, newDeckName);
@@ -36,7 +34,6 @@ export default function DashboardPage() {
         }
     };
 
-    // Delete a deck
     const handleDeleteDeck = async (deckId) => {
         const res = await apiService.deleteDeck(token, deckId);
         if (!res.error) {
@@ -47,7 +44,6 @@ export default function DashboardPage() {
     return (
         <ProtectedRoute>
             <section className="container mx-auto mt-20 px-4 py-8">
-                {/* Header */}
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
                     <div>
                         <h1 className="text-2xl font-bold">
@@ -57,7 +53,6 @@ export default function DashboardPage() {
                             Manage your decks and start studying
                         </p>
                     </div>
-                    {/* Create Deck Input */}
                     <div className="flex gap-2 w-full sm:w-auto">
                         <Input
                             placeholder="New deck name..."
@@ -71,7 +66,6 @@ export default function DashboardPage() {
                     </div>
                 </div>
 
-                {/* Decks Grid */}
                 {loading && (
                     <p className="text-center text-muted-foreground">
                         Loading...

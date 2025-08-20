@@ -1,5 +1,3 @@
-
-
 # /routes/deck_routes.py
 from flask import Blueprint, request, jsonify
 from utils.supabase_client import supabase, get_user_from_token
@@ -87,7 +85,6 @@ def get_deck(deck_id):
     if auth_error:
         return jsonify({"error": auth_error}), 401
 
-    # Fetch the deck from Supabase
     try:
         supabase.postgrest.auth(token)
         response = supabase.table("decks").select("*").eq("id", deck_id).single().execute()

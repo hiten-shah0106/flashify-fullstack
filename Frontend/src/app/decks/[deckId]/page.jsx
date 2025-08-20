@@ -26,12 +26,10 @@ export default function DeckDetailsPage() {
     const [cards, setCards] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    // Modal States
     const [isAddOpen, setIsAddOpen] = useState(false);
     const [isEditOpen, setIsEditOpen] = useState(false);
     const [editCard, setEditCard] = useState(null);
 
-    // Form States
     const [question, setQuestion] = useState("");
     const [answer, setAnswer] = useState("");
 
@@ -48,7 +46,6 @@ export default function DeckDetailsPage() {
         loadData();
     }, [deckId, token]);
 
-    // Handle Add Card
     const handleAddCard = async () => {
         const res = await apiService.createCard(
             token,
@@ -62,7 +59,6 @@ export default function DeckDetailsPage() {
         setAnswer("");
     };
 
-    // Handle Edit Card
     const handleEditCard = async () => {
         const res = await fetch(
             `${
@@ -85,13 +81,11 @@ export default function DeckDetailsPage() {
         setAnswer("");
     };
 
-    // Handle Delete Card
     const handleDeleteCard = async (id) => {
         await apiService.deleteCard(token, id);
         setCards(cards.filter((c) => c.id !== id));
     };
 
-    // Open edit modal with data
     const openEditModal = (card) => {
         setEditCard(card);
         setQuestion(card.question);
@@ -107,7 +101,6 @@ export default function DeckDetailsPage() {
                         Deck: {deckName}
                     </h1>
 
-                    {/* Add Card Button */}
                     <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>
                         <DialogTrigger asChild>
                             <Button className="w-full sm:w-auto">
@@ -192,7 +185,6 @@ export default function DeckDetailsPage() {
                     </div>
                 )}
 
-                {/* Edit Card Modal */}
                 <Dialog open={isEditOpen} onOpenChange={setIsEditOpen}>
                     <DialogContent>
                         <DialogHeader>

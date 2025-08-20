@@ -1,17 +1,16 @@
 "use client"; // ✅ Needed for hooks (useState, useRouter, useAuth)
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/context/AuthContext"; // ✅ Use your Auth context
+import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 
 export default function LoginPage() {
-    const { login, token, loadingAuth } = useAuth(); // ✅ Get login function from AuthContext
+    const { login, token, loadingAuth } = useAuth();
     const router = useRouter();
 
-    // ✅ Local state for controlled inputs and feedback
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
@@ -22,18 +21,15 @@ export default function LoginPage() {
         }
     }, [token, loadingAuth, router]);
 
-    // ✅ Submit handler that calls your Flask backend via AuthContext
     async function handleSubmit(e) {
         e.preventDefault();
         setMessage("");
 
-        const res = await login(email, password); // calls /auth/login under the hood
+        const res = await login(email, password);
 
         if (res?.session?.access_token) {
-            // ✅ Logged in successfully; token persisted by AuthContext
-            router.push("/dashboard"); // redirect to your dashboard
+            router.push("/dashboard");
         } else {
-            // ✅ Friendly error message
             const err =
                 res?.error ||
                 res?.message ||
@@ -44,7 +40,6 @@ export default function LoginPage() {
 
     return (
         <section className="flex min-h-screen px-4 py-16 md:py-32 dark:bg-transparent">
-            {/* ✅ Hooked up onSubmit; styles unchanged */}
             <form
                 onSubmit={handleSubmit}
                 className="bg-card m-auto h-fit w-full max-w-sm rounded-[calc(var(--radius)+.125rem)] border p-0.5 shadow-md dark:[--color-muted:var(--color-zinc-900)]"
@@ -72,7 +67,6 @@ export default function LoginPage() {
                                 required
                                 name="email"
                                 id="email"
-                                // ✅ Controlled input
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
@@ -88,18 +82,15 @@ export default function LoginPage() {
                                 name="pwd"
                                 id="pwd"
                                 className="input sz-md variant-mixed"
-                                // ✅ Controlled input
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
 
-                        {/* ✅ Button triggers form submit */}
                         <Button type="submit" className="w-full">
                             Continue
                         </Button>
 
-                        {/* ✅ Inline feedback (errors, etc.) */}
                         {message && (
                             <p className="text-sm text-center mt-2">
                                 {message}

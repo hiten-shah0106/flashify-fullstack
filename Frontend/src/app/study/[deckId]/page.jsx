@@ -35,7 +35,7 @@ export default function StudyPage() {
             setCurrentIndex((prev) => prev + 1);
             setShowAnswer(false);
         } else {
-            setSessionEnded(true); // Auto-end on last card
+            setSessionEnded(true);
         }
     }, [currentIndex, cards.length]);
 
@@ -54,7 +54,6 @@ export default function StudyPage() {
 
     const handleEndSession = () => setSessionEnded(true);
 
-    // Keyboard shortcuts
     useEffect(() => {
         const handleKeyDown = (e) => {
             if (e.code === "Space") {
@@ -100,7 +99,6 @@ export default function StudyPage() {
             <div className="flex flex-col items-center justify-center min-h-screen p-4">
                 <h1 className="text-2xl font-bold mb-6">Study Mode</h1>
 
-                {/* Flip Card */}
                 <div
                     className={`relative w-80 h-48 perspective`}
                     onClick={handleFlip}
@@ -110,13 +108,11 @@ export default function StudyPage() {
                             showAnswer ? "rotate-y-180" : ""
                         }`}
                     >
-                        {/* Front */}
                         <div className="absolute w-full h-full bg-card border p-6 rounded-xl shadow-md flex items-center justify-center backface-hidden">
                             <p className="text-lg font-medium">
                                 {currentCard.question}
                             </p>
                         </div>
-                        {/* Back */}
                         <div className="absolute w-full h-full bg-card border p-6 rounded-xl shadow-md flex items-center justify-center rotate-y-180 backface-hidden">
                             <p className="text-lg font-medium">
                                 {currentCard.answer}
@@ -125,7 +121,6 @@ export default function StudyPage() {
                     </div>
                 </div>
 
-                {/* Navigation */}
                 <div className="flex gap-4 mt-6">
                     {!showAnswer ? (
                         <Button onClick={handleFlip}>Show Answer</Button>
@@ -154,7 +149,6 @@ export default function StudyPage() {
                     </Button>
                 </div>
 
-                {/* Progress & End Session */}
                 <div className="mt-4 flex flex-col items-center">
                     <p className="text-sm text-muted-foreground">
                         Card {currentIndex + 1} of {cards.length}

@@ -15,7 +15,6 @@ def signup():
     
     try:
         res = supabase.auth.sign_up({"email": email, "password": password})
-        # Convert to dict for JSON serialization
         return jsonify({
             "user": res.user.model_dump() if res.user else None,
             "session": res.session.model_dump() if res.session else None
@@ -34,7 +33,6 @@ def login():
     
     try:
         res = supabase.auth.sign_in_with_password({"email": email, "password": password})
-        # Convert to dict for JSON serialization
         return jsonify({
             "user": res.user.model_dump() if res.user else None,
             "session": res.session.model_dump() if res.session else None

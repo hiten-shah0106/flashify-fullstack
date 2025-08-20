@@ -8,13 +8,12 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
     const [token, setToken] = useState(null);
     const [user, setUser] = useState(null);
-    const [loadingAuth, setLoadingAuth] = useState(true); // ✅ NEW
+    const [loadingAuth, setLoadingAuth] = useState(true);
 
     useEffect(() => {
         const savedToken = localStorage.getItem("token");
         if (savedToken) {
             setToken(savedToken);
-            // ✅ Fetch user details so Navbar can show email immediately
             apiService.getUser(savedToken).then((res) => {
                 if (res.user) setUser(res.user);
                 setLoadingAuth(false);

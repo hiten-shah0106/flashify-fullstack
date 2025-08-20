@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react"; // ✅ Added useEffect for redirect
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
@@ -23,7 +23,7 @@ export default function SignupPage() {
     }, [token, loadingAuth, router]);
 
     if (loadingAuth) {
-        return null; // prevent UI flash before auth state is known
+        return null;
     }
 
     async function handleSubmit(e) {

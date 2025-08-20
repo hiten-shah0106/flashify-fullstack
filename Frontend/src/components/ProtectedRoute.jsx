@@ -10,15 +10,13 @@ export default function ProtectedRoute({ children }) {
 
     useEffect(() => {
         if (!token) {
-            // No token? → Go to login
             router.replace("/login");
         } else {
-            setLoading(false); // Token found → render children
+            setLoading(false);
         }
     }, [token, router]);
 
     if (loading) {
-        // Optional loading state
         return <p className="text-center mt-20">Loading...</p>;
     }
 

@@ -9,7 +9,7 @@ import {
 import { Menu, MoveRight, X } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
-import { useAuth } from "@/context/AuthContext"; // ✅ Import Auth Context
+import { useAuth } from "@/context/AuthContext";
 
 function Navbar() {
     const navigationItems = [
@@ -27,24 +27,21 @@ function Navbar() {
 
     const [isOpen, setOpen] = useState(false);
 
-    // ✅ Access token, user, and logout function
     const { token, user, logout, loadingAuth } = useAuth();
 
     if (loadingAuth) {
-        return null; // or show a skeleton
+        return null;
     }
 
     return (
         <header className="w-full z-40 fixed top-0 left-0 bg-surface-0">
             <div className="container relative mx-auto min-h-20 flex gap-4 flex-row lg:grid lg:grid-cols-3 items-center">
-                {/* Left: Logo */}
                 <Link href="/">
                     <div className="flex lg:justify-start">
                         <p className="font-bold text-2xl">Flashify</p>
                     </div>
                 </Link>
 
-                {/* Center: Navigation Items */}
                 <div className="justify-center items-center gap-4 lg:flex hidden flex-row">
                     <NavigationMenu className="flex justify-start items-start">
                         <NavigationMenuList className="flex justify-start gap-4 flex-row">
@@ -66,25 +63,19 @@ function Navbar() {
                     </NavigationMenu>
                 </div>
 
-                {/* Right: Auth Buttons or User Info */}
                 <div className="flex justify-end w-full gap-4">
                     <div className="border-r hidden md:inline"></div>
 
                     {token && user ? (
-                        // ✅ If logged in, show email & Logout button
                         <>
                             <span className="hidden md:inline self-center text-sm font-medium">
                                 {user.email}
                             </span>
-                            <Button
-                                variant="outline"
-                                onClick={logout} // ✅ Call logout from context
-                            >
+                            <Button variant="outline" onClick={logout}>
                                 Logout
                             </Button>
                         </>
                     ) : (
-                        // ✅ If not logged in, show Sign in & Get started
                         <>
                             <Link href="/login">
                                 <Button variant="outline">Sign in</Button>
@@ -96,7 +87,6 @@ function Navbar() {
                     )}
                 </div>
 
-                {/* Mobile Menu */}
                 <div className="flex w-12 shrink lg:hidden items-end justify-end mx-auto">
                     <Button variant="ghost" onClick={() => setOpen(!isOpen)}>
                         {isOpen ? (
@@ -123,7 +113,6 @@ function Navbar() {
                                 </div>
                             ))}
 
-                            {/* ✅ Mobile view auth buttons */}
                             {token && user ? (
                                 <>
                                     <span className="px-2 text-sm font-medium">
